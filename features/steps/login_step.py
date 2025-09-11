@@ -34,3 +34,16 @@ def then_validation(context):
     assert title == "Products",f"Expected 'Products' but got {title}"
     time.sleep(3)
     print("pass....")
+
+@when("user enters invalid creadentials")
+def step_impl(context):
+    context.driver.find_element(By.ID,"user-name").clear()
+    context.driver.find_element(By.ID,"user-name").send_keys("stan23dard_user")
+    context.driver.find_element(By.ID,"password").clear()
+    context.driver.find_element(By.ID,"password").send_keys("secret_11sauce")
+
+@then("user should show error")
+def errorPage(context):
+    pass
+    error_message = context.driver.find_element(By.XPATH,"//h3/text()").text
+    assert error_message.__contains__("Epic sadface")
